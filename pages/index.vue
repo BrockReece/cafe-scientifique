@@ -78,8 +78,8 @@ export default {
   apollo: {
     allEvents: {
       query: gql`
-        query fetchEvents {
-          allEvents(orderBy: [date_ASC]) {
+        query fetchEvents($filter: EventModelFilter) {
+          allEvents(orderBy: [ date_ASC ] first: 3, filter: $filter) {
             id
             date
             description
@@ -89,7 +89,16 @@ export default {
             }
           }
         }
-      `
+      `,
+      variables () {
+        return {
+          filter: {
+            date: {
+              gte: this.$dateFns.format(new Date(), 'yyyy-MM-dd')
+            }
+          }
+        }
+      }
     }
   },
 
