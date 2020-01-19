@@ -9,7 +9,7 @@
               height="194"
             >
             <div class="headline pa-3">
-              Cafe Scietifique
+              Cafe Scientifique
             </div>
             <div class="title mb-5">
               Interesting and insightful exploration of contemporary science issues
