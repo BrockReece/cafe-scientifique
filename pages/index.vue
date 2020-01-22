@@ -98,6 +98,9 @@ export default {
             }
           }
         }
+      },
+      skip () {
+        return process.client
       }
     }
   },
