@@ -99,6 +99,15 @@ export default {
           }
         }
       },
+      prefetch () {
+        return {
+          filter: {
+            date: {
+              gte: this.$dateFns.format(new Date(), 'yyyy-MM-dd')
+            }
+          }
+        }
+      },
       skip () {
         console.log(process.client)
         return process.client
