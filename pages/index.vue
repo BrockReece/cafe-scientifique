@@ -107,10 +107,6 @@ export default {
             }
           }
         }
-      },
-      skip () {
-        console.log(process.client)
-        return false
       }
     }
   },
