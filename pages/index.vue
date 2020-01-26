@@ -110,7 +110,7 @@ export default {
       },
       skip () {
         console.log(process.client)
-        return process.client
+        return false
       }
     }
   },
