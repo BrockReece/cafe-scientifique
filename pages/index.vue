@@ -98,6 +98,15 @@ export default {
             }
           }
         }
+      },
+      prefetch () {
+        return {
+          filter: {
+            date: {
+              gte: this.$dateFns.format(new Date(), 'yyyy-MM-dd')
+            }
+          }
+        }
       }
     }
   },
