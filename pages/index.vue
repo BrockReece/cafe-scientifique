@@ -31,44 +31,51 @@
         </v-layout>
       </v-container>
     </div>
-    <div class="grey lighten-3">
+    <div class="grey lighten-3 pb-5">
       <v-container>
         <div class="title my-3">
           Upcoming events
         </div>
         <v-layout row layout>
           <v-flex v-for="event in allEvents" :key="event.id" xs12 md4>
-            <v-card class="ma-3">
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title class="headline">
-                    {{ $dateFns.format(new Date(event.date), 'do MMMM yyyy') }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+            <v-card class="ma-3" height="100%">
+              <v-layout column style="height: 100%">
+                <v-flex>
+                  <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title class="headline">
+                        {{ $dateFns.format(new Date(event.date), 'do MMMM yyyy') }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
 
-              <v-img
-                v-if="event.previewImage"
-                :src="event.previewImage.url"
-                height="194"
-              />
+                  <v-img
+                    v-if="event.previewImage"
+                    :src="event.previewImage.url"
+                    height="194"
+                  />
 
-              <v-card-title>{{ event.title }}</v-card-title>
-              <v-card-subtitle class="subtitle-1">
-                {{ event.speaker.name }}
-              </v-card-subtitle>
-              <v-card-text v-html="$md.render(event.description)" />
-
-              <v-card-actions>
-                <v-btn
+                  <v-card-title style="word-break: inherit">
+                    {{ event.title }}
+                  </v-card-title>
+                  <v-card-subtitle class="subtitle-1">
+                    {{ event.speaker.name }}
+                  </v-card-subtitle>
+                  <v-card-text v-html="$md.render(event.description)" />
+                </v-flex>
+                <v-spacer />
+                <v-card-actions
                   v-if="event.bookingLink"
                   :href="event.bookingLink"
-                  text
-                  color="blue accent-4"
                 >
-                  Book
-                </v-btn>
-              </v-card-actions>
+                  <v-btn
+                    text
+                    color="blue accent-4"
+                  >
+                    Book
+                  </v-btn>
+                </v-card-actions>
+              </v-layout>
             </v-card>
           </v-flex>
         </v-layout>
