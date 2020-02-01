@@ -37,7 +37,7 @@
           Upcoming events
         </div>
         <v-layout row layout>
-          <v-flex v-for="event in allEvents" :key="event.id" xs12 md4>
+          <v-flex v-for="event in allEvents" :key="event.id" xs12 md4 class="pb-3">
             <v-card class="ma-3" height="100%">
               <v-layout column style="height: 100%">
                 <v-flex>
