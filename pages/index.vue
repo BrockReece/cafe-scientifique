@@ -66,9 +66,9 @@
                 <v-spacer />
                 <v-card-actions
                   v-if="event.bookingLink"
-                  :href="event.bookingLink"
                 >
                   <v-btn
+                    :href="event.bookingLink"
                     text
                     color="blue accent-4"
                   >
