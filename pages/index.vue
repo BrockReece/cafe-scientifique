@@ -81,6 +81,32 @@
         </v-layout>
       </v-container>
     </div>
+    <div class="grey lighten-5 pa-5 text-center">
+      <v-container>
+        <v-layout row align-center fill-height>
+          <v-flex xs12 md6 class="pa-5 headline">
+            <div class="px-5">
+              Come and join us on the Second Monday of each month at the Alb
+            </div>
+          </v-flex>
+          <v-flex xs12 md6 class="pa-5">
+            <div style="width: 100%">
+              <no-ssr>
+                <iframe
+                  width="100%"
+                  height="400"
+                  src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=The%20Alb%20Bar%2C%2014%20smithfield%20rd%2C%20Shrewsbury%20sy1%201pb+(the%20alb%20shrewsbury)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                  frameborder="0"
+                  scrolling="no"
+                  marginheight="0"
+                  marginwidth="0"
+                />
+              </no-ssr>
+            </div><br>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
   </div>
 </template>
 
