@@ -13,6 +13,8 @@
 
 <script>
 import gql from 'graphql-tag'
+
+import EventCardFields from '~/gql/EventCard.gql'
 import EventCard from '~/components/EventCard'
 
 export default {
@@ -25,19 +27,10 @@ export default {
       query: gql`
         query fetchEvents {
           allEvents(orderBy: [ date_ASC ]) {
-            id
-            date
-            title
-            description
-            bookingLink
-            previewImage {
-              url
-            }
-            speaker {
-              name
-            }
+            ...EventCardFields
           }
         }
+        ${EventCardFields}
       `
     }
   },

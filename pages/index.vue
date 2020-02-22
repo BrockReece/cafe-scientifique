@@ -83,6 +83,8 @@
 
 <script>
 import gql from 'graphql-tag'
+
+import EventCardFields from '~/gql/EventCard.gql'
 import EventCard from '~/components/EventCard'
 
 export default {
@@ -95,19 +97,10 @@ export default {
       query: gql`
         query fetchEvents($filter: EventModelFilter) {
           allEvents(orderBy: [ date_ASC ] first: 3, filter: $filter) {
-            id
-            date
-            title
-            description
-            bookingLink
-            previewImage {
-              url
-            }
-            speaker {
-              name
-            }
+            ...EventCardFields
           }
         }
+        ${EventCardFields}
       `,
       variables () {
         return {
