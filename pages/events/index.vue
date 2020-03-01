@@ -22,8 +22,15 @@ export default {
     EventCard
   },
 
-  apollo: {
-    allEvents: {
+  data () {
+    return {
+      allEvents: []
+    }
+  },
+
+  async asyncData (context) {
+    const client = context.app.apolloProvider.defaultClient
+    const { data } = await client.query({
       query: gql`
         query fetchEvents {
           allEvents(orderBy: [ date_ASC ]) {
@@ -32,12 +39,9 @@ export default {
         }
         ${EventCardFields}
       `
-    }
-  },
-
-  data () {
+    })
     return {
-      allEvents: []
+      allEvents: data.allEvents
     }
   }
 }
