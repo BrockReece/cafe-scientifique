@@ -29,6 +29,8 @@ export default {
   },
 
   async asyncData (context) {
+    if (!process.server) { return {} }
+
     const client = context.app.apolloProvider.defaultClient
     const { data } = await client.query({
       query: gql`
