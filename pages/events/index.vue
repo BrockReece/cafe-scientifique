@@ -29,11 +29,8 @@ export default {
   },
 
   async asyncData (context) {
-    if (!process.server) { return {} }
-
     const client = context.app.apolloProvider.defaultClient
-    const { data } = await client.query({
-      query: gql`
+    const query = gql`
         query fetchEvents {
           allEvents(orderBy: [ date_ASC ]) {
             ...EventCardFields
@@ -41,7 +38,18 @@ export default {
         }
         ${EventCardFields}
       `
+
+    if (!process.server) {
+      const cached = client.readQuery({ query })
+      if (cached) {
+        return cached
+      }
+    }
+
+    const { data } = await client.query({
+      query
     })
+
     return {
       allEvents: data.allEvents
     }
