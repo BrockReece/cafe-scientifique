@@ -13,45 +13,31 @@
 
 <script>
 import gql from 'graphql-tag'
+import { useQuery, useResult } from '@vue/apollo-composable'
 
 import EventCardFields from '~/gql/EventCard.gql'
 import EventCard from '~/components/EventCard'
+
+const query = gql`
+  query fetchEvents {
+    allEvents(orderBy: [ date_ASC ]) {
+      ...EventCardFields
+    }
+  }
+  ${EventCardFields}
+`
 
 export default {
   components: {
     EventCard
   },
 
-  data () {
-    return {
-      allEvents: []
-    }
-  },
-
-  async asyncData (context) {
-    const client = context.app.apolloProvider.defaultClient
-    const query = gql`
-        query fetchEvents {
-          allEvents(orderBy: [ date_ASC ]) {
-            ...EventCardFields
-          }
-        }
-        ${EventCardFields}
-      `
-
-    if (!process.server) {
-      const cached = client.readQuery({ query })
-      if (cached) {
-        return cached
-      }
-    }
-
-    const { data } = await client.query({
-      query
-    })
+  setup (context) {
+    const { result } = useQuery(query)
+    const allEvents = useResult(result, [], data => data.allEvents)
 
     return {
-      allEvents: data.allEvents
+      allEvents
     }
   }
 }
