@@ -45,7 +45,7 @@
           <v-btn
             text
             color="blue accent-4"
-            to="/events/"
+            href="/events/"
           >
             See more events
           </v-btn>
