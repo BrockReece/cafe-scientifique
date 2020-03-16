@@ -38,47 +38,18 @@
         </div>
         <v-layout row layout>
           <v-flex v-for="event in allEvents" :key="event.id" xs12 md4 class="pb-3">
-            <v-card class="ma-3" height="100%">
-              <v-layout column style="height: 100%">
-                <v-flex>
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title class="headline">
-                        {{ $dateFns.format(new Date(event.date), 'do MMMM yyyy') }}
-                      </v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-
-                  <v-img
-                    v-if="event.previewImage"
-                    :src="event.previewImage.url"
-                    height="194"
-                  />
-
-                  <v-card-title style="word-break: inherit">
-                    {{ event.title }}
-                  </v-card-title>
-                  <v-card-subtitle class="subtitle-1">
-                    {{ event.speaker.name }}
-                  </v-card-subtitle>
-                  <v-card-text v-html="$md.render(event.description)" />
-                </v-flex>
-                <v-spacer />
-                <v-card-actions
-                  v-if="event.bookingLink"
-                >
-                  <v-btn
-                    :href="event.bookingLink"
-                    text
-                    color="blue accent-4"
-                  >
-                    Book
-                  </v-btn>
-                </v-card-actions>
-              </v-layout>
-            </v-card>
+            <event-card :event="event" />
           </v-flex>
         </v-layout>
+        <div class="title mt-5">
+          <v-btn
+            text
+            color="blue accent-4"
+            href="/events/"
+          >
+            See more events
+          </v-btn>
+        </div>
       </v-container>
     </div>
     <div class="grey lighten-5 pa-5 text-center">
@@ -112,25 +83,24 @@
 
 <script>
 import gql from 'graphql-tag'
+
+import EventCardFields from '~/gql/EventCard.gql'
+import EventCard from '~/components/EventCard'
+
 export default {
+  components: {
+    EventCard
+  },
+
   apollo: {
     allEvents: {
       query: gql`
         query fetchEvents($filter: EventModelFilter) {
           allEvents(orderBy: [ date_ASC ] first: 3, filter: $filter) {
-            id
-            date
-            title
-            description
-            bookingLink
-            previewImage {
-              url
-            }
-            speaker {
-              name
-            }
+            ...EventCardFields
           }
         }
+        ${EventCardFields}
       `,
       variables () {
         return {

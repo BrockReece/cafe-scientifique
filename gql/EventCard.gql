@@ -1,0 +1,13 @@
+fragment EventCardFields on EventRecord {
+  id
+  date
+  title
+  description
+  bookingLink
+  previewImage {
+    url
+  }
+  speaker {
+    name
+  }
+}
