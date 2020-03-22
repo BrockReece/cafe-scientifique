@@ -12,7 +12,7 @@
 
         <v-img
           v-if="event.previewImage"
-          :src="event.previewImage.url"
+          :src="`${event.previewImage.url}?auto=format&h=194`"
           height="194"
         />
 

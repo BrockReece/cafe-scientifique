@@ -5,7 +5,7 @@
         <v-layout class="justify-center">
           <v-flex xs12 lg4>
             <img
-              src="~/assets/logo.png"
+              src="~/assets/logo.png?format=auto?h=194"
               height="194"
             >
             <div class="headline pa-3 pb-1">
