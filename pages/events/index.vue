@@ -13,7 +13,6 @@
 
 <script>
 import gql from 'graphql-tag'
-import { useQuery, useResult } from '@vue/apollo-composable'
 
 import EventCardFields from '~/gql/EventCard.gql'
 import EventCard from '~/components/EventCard'
@@ -32,12 +31,23 @@ export default {
     EventCard
   },
 
-  setup (context) {
-    const { result } = useQuery(query)
-    const allEvents = useResult(result, [], data => data.allEvents)
-
+  data () {
     return {
-      allEvents
+      allEvents: []
+    }
+  },
+
+  async asyncData ({ app, $payloadURL, route }) {
+    if (process.static && process.client && $payloadURL) {
+      return fetch($payloadURL(route)).then(res => res.json())
+    }
+
+    const client = app.apolloProvider.defaultClient
+    const { data } = await client.query({
+      query
+    })
+    return {
+      allEvents: data.allEvents
     }
   }
 }

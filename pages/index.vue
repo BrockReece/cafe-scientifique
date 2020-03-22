@@ -45,7 +45,7 @@
           <v-btn
             text
             color="blue accent-4"
-            href="/events/"
+            to="/events/"
           >
             See more events
           </v-btn>
@@ -92,8 +92,19 @@ export default {
     EventCard
   },
 
-  apollo: {
-    allEvents: {
+  data () {
+    return {
+      allEvents: []
+    }
+  },
+
+  async asyncData ({ app, $payloadURL, route, $dateFns }) {
+    if (process.static && process.client && $payloadURL) {
+      return fetch($payloadURL(route)).then(res => res.json())
+    }
+
+    const client = app.apolloProvider.defaultClient
+    const { data } = await client.query({
       query: gql`
         query fetchEvents($filter: EventModelFilter) {
           allEvents(orderBy: [ date_ASC ] first: 3, filter: $filter) {
@@ -102,30 +113,17 @@ export default {
         }
         ${EventCardFields}
       `,
-      variables () {
-        return {
-          filter: {
-            date: {
-              gte: this.$dateFns.format(new Date(), 'yyyy-MM-dd')
-            }
-          }
-        }
-      },
-      prefetch () {
-        return {
-          filter: {
-            date: {
-              gte: this.$dateFns.format(new Date(), 'yyyy-MM-dd')
-            }
+      variables: {
+        filter: {
+          date: {
+            gte: app.$dateFns.format(new Date(), 'yyyy-MM-dd')
           }
         }
       }
-    }
-  },
+    })
 
-  data () {
     return {
-      allEvents: []
+      allEvents: data.allEvents
     }
   }
 }
