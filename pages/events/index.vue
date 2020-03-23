@@ -1,6 +1,12 @@
 <template>
   <v-container>
     <div class="title my-3">
+      <v-icon
+        @click="$router.push('/')"
+        large
+      >
+        mdi-chevron-left
+      </v-icon>
       All events
     </div>
     <v-layout row layout>
