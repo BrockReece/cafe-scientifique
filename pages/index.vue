@@ -125,6 +125,12 @@ export default {
     return {
       allEvents: data.allEvents
     }
+  },
+
+  head () {
+    return {
+      title: 'Home'
+    }
   }
 }
 </script>

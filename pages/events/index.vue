@@ -55,6 +55,12 @@ export default {
     return {
       allEvents: data.allEvents
     }
+  },
+
+  head () {
+    return {
+      title: 'All events'
+    }
   }
 }
 </script>
