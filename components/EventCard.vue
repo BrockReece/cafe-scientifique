@@ -14,6 +14,7 @@
           v-if="event.previewImage"
           :src="`${event.previewImage.url}?auto=format&h=194`"
           height="194"
+          alt="Event image"
         />
 
         <v-card-title style="word-break: inherit">

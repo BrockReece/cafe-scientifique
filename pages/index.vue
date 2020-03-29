@@ -7,6 +7,7 @@
             <img
               src="~/assets/logo.png?format=auto?h=194"
               height="194"
+              alt="Cafe Scientifique logo"
             >
             <div class="headline pa-3 pb-1">
               Cafe Scientifique
@@ -71,6 +72,7 @@
                   scrolling="no"
                   marginheight="0"
                   marginwidth="0"
+                  title="Map"
                 />
               </no-ssr>
             </div><br>
