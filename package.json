@@ -21,7 +21,7 @@
     "@nuxtjs/vuetify": "^1.0.0",
     "@vue/apollo-composable": "^4.0.0-alpha.7",
     "@vue/composition-api": "^0.4.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^3.12.4",
     "nuxt-payload-extractor": "^1.0.0"
   },
   "devDependencies": {
